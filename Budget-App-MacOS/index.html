@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bütçem</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-drag-region"></div>
+      <div class="logo">
+        <div class="logo-icon">₺</div>
+        <span>Bütçem</span>
+      </div>
+
+      <div class="month-nav">
+        <button class="month-btn" id="prevMonth">‹</button>
+        <span class="month-label" id="monthLabel"></span>
+        <button class="month-btn" id="nextMonth">›</button>
+      </div>
+
+      <div class="balance-card">
+        <div class="balance-row">
+          <div class="balance-item">
+            <div class="balance-mini-label">Gelir</div>
+            <div class="balance-mini-val income" id="totalIncome">₺0</div>
+          </div>
+          <div class="balance-divider"></div>
+          <div class="balance-item">
+            <div class="balance-mini-label">Gider</div>
+            <div class="balance-mini-val expense" id="totalExpense">₺0</div>
+          </div>
+        </div>
+        <div class="net-row">
+          <div class="net-label">Net Bakiye</div>
+          <div class="net-amount" id="netBalance">₺0</div>
+        </div>
+      </div>
+
+      <div class="section-title">Kategoriler</div>
+      <div class="cat-list" id="catList"></div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-drag-region"></div>
+        <div class="tab-group">
+          <button class="tab-btn active" data-tab="all">Tümü</button>
+          <button class="tab-btn" data-tab="income">Gelir</button>
+          <button class="tab-btn" data-tab="expense">Gider</button>
+        </div>
+        <button class="add-btn" id="addBtn">+ İşlem Ekle</button>
+      </div>
+
+      <div class="content">
+        <!-- Chart Column -->
+        <div class="chart-col">
+          <div class="donut-wrap">
+            <canvas id="donutChart" width="220" height="220"></canvas>
+            <div class="donut-center">
+              <div class="donut-center-val" id="donutVal">₺0</div>
+              <div class="donut-center-lbl">toplam gider</div>
+            </div>
+          </div>
+          <div class="legend" id="legend"></div>
+        </div>
+
+        <!-- Transactions Column -->
+        <div class="tx-col" id="txCol"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Yeni İşlem</span>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+
+      <div class="type-toggle">
+        <button class="type-btn active expense-btn" id="expBtn">− Gider</button>
+        <button class="type-btn income-btn" id="incBtn">+ Gelir</button>
+      </div>
+
+      <div class="form-group">
+        <label>Tutar (₺)</label>
+        <input type="number" id="amountInput" placeholder="0,00" min="0" step="0.01" />
+      </div>
+      <div class="form-group">
+        <label>Açıklama</label>
+        <input type="text" id="noteInput" placeholder="Ne için?" />
+      </div>
+      <div class="form-group">
+        <label>Tarih</label>
+        <input type="date" id="dateInput" />
+      </div>
+      <div class="form-group">
+        <label>Kategori</label>
+        <div class="cat-grid" id="catGrid"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancelBtn">İptal</button>
+        <button class="btn-save" id="saveBtn">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
